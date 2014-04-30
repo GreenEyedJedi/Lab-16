@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    username: $('#user-name').val(),
+                };
+
+		console.log(payload);
+
+                $.ajax({
+                    url: "/getuser",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <h3>Find Account Information</h3>
+    Account Name: <input id="user-name" type="text" /> <br />
+    <input id="user-submit" type="submit" />
+    <p id="output"></p>
+  </body>
+</html>
